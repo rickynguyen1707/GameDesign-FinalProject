@@ -67,9 +67,14 @@
     <Compile Include="Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Gameover.cs" />
+    <Compile Include="Assets\Scripts\Level1To2.cs" />
+    <Compile Include="Assets\Scripts\Level2To3.cs" />
+    <Compile Include="Assets\Scripts\Level3To4.cs" />
     <Compile Include="Assets\Scripts\Level4To5.cs" />
     <Compile Include="Assets\Scripts\Level5To6.cs" />
     <Compile Include="Assets\Scripts\Level6To7.cs" />
+    <Compile Include="Assets\Scripts\Level7To8.cs" />
+    <Compile Include="Assets\Scripts\Level8To9.cs" />
     <Compile Include="Assets\Scripts\move.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Snowball.cs" />

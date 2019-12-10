@@ -10,7 +10,7 @@ public class Level6To7 : MonoBehaviour
     {
         if (col.gameObject == Player)
         {
-            col.transform.position = new Vector3(202.5f, 10.5f, 0);
+            col.transform.position = new Vector3(202.5f,-10.5f, 0);
         }
     }
 }
