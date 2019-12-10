@@ -20,6 +20,14 @@ public class cameraFollow : MonoBehaviour
     void LateUpdate()
     {
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        transform.position = player.transform.position + offset;
+        if(player.GetComponent<Renderer>().enabled == false)
+        {
+
+        }
+        else
+        {
+            transform.position = player.transform.position + offset;
+        }
+        
     }
 }

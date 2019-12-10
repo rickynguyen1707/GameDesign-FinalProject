@@ -12,6 +12,8 @@ public class Snowball : MonoBehaviour
     private bool facingRight = false;
     private float angle;
     Rigidbody2D rgbd;
+    
+    private GameObject[] randombox;
 
     
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class Snowball : MonoBehaviour
     {
         rgbd = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player");
+        randombox = GameObject.FindGameObjectsWithTag("RandomBox");
         moveDirection = (target.transform.position - transform.position).normalized * moveSpeed;
         rgbd.velocity = new Vector2(moveDirection.x, moveDirection.y);
         Destroy(gameObject, 5f);
@@ -46,9 +49,13 @@ public class Snowball : MonoBehaviour
     {
         if(col.gameObject.tag.Equals("Player"))
         {
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<Renderer>().enabled = false;
             Destroy(this.gameObject);
             Gameover.Instance.SendGameover();
+            for (int i = 0; i < randombox.Length; i++)
+            {
+                randombox[i].GetComponent<BoxCollider2D>().enabled = true;
+            }
         }
         else
         {

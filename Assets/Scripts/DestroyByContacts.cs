@@ -8,7 +8,7 @@ public class DestroyByContacts : MonoBehaviour
     {
 
         // Destroy the "other" object and destroy this asteroid
-        Destroy(other.gameObject);
+        other.gameObject.GetComponent<Renderer>().enabled = false;
         Gameover.Instance.SendGameover();
     }
 }

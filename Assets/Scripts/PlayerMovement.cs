@@ -12,12 +12,16 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rgbd;
     private bool walk, walk_left, walk_right, jump, wall_jump;
+    private bool isWallSliding = false;
 
+    private float wallJumpTime = 0f;
+    private Vector3[] wallJumpControlPoint;
     public enum PlayerState
     {
         jumping,
         idle,
-        walking
+        walking,
+        wallsliding
     }
 
     private PlayerState playerState = PlayerState.idle;
@@ -36,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckPlayerInput();
         UpdatePlayerPosition();
+        
         //UpdateAnimationStates();
     }
 
@@ -58,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             pos = CheckWallRays(pos, scale.x);
         }
 
-        if ((jump||wall_jump) && playerState != PlayerState.jumping)
+        if (jump && (playerState != PlayerState.jumping || isWallSliding == true))
         {
             playerState = PlayerState.jumping;
             velocity = new Vector2(velocity.x, jumpVelocity);
@@ -66,13 +71,38 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerState == PlayerState.jumping)
         {
-            pos.y += velocity.y * Time.deltaTime;
-            velocity.y -= gravity * Time.deltaTime;
+            CheckIfWallSliding(pos, scale.x);
+            if (isWallSliding)
+            {
+                if (walk_left || walk_right)
+                {
+                    pos.y += velocity.y * Time.deltaTime;
+                    velocity.y -= gravity * Time.deltaTime;
+                }
+                /*if (walk_left || walk_right)
+                {
+                //if is moving while jumping, reduce jump height
+                rgbd.velocity = new Vector2(rgbd.velocity.x, rgbd.velocity.y * -0.5f);
+                
+                }*/
+               
+            }
+            else
+            {
+                pos.y += velocity.y * Time.deltaTime;
+                velocity.y -= gravity * Time.deltaTime;
+            }
+
+            isWallSliding = false;
+            grounded = false;
+ 
         }
+        
         if (velocity.y <= 0)
             pos = CheckFloorRays(pos);
         if (velocity.y >= 0)
             pos = CheckCeilingRays(pos);
+        CheckIfWallSliding(pos, scale.x);
 
         rgbd.MovePosition(new Vector2(pos.x,pos.y));
         transform.localScale = scale;
@@ -193,6 +223,34 @@ public class PlayerMovement : MonoBehaviour
             Fall();
         }
         return pos;
+    }
+    void CheckIfWallSliding(Vector3 pos, float direction)
+    {
+        if (!grounded)
+        {
+            Vector2 originTop = new Vector2(pos.x + direction * .35f, pos.y + 0.6f - 0.1f);
+            Vector2 originMiddle = new Vector2(pos.x + direction * .35f, pos.y);
+            Vector2 originBottom = new Vector2(pos.x + direction * .35f, pos.y - 0.6f + 0.1f);
+
+            RaycastHit2D wallTop = Physics2D.Raycast(originTop, new Vector2(direction, 0), velocity.x * Time.deltaTime, wallMask);
+            RaycastHit2D wallMiddle = Physics2D.Raycast(originMiddle, new Vector2(direction, 0), velocity.x * Time.deltaTime, wallMask);
+            RaycastHit2D wallBottom = Physics2D.Raycast(originBottom, new Vector2(direction, 0), velocity.x * Time.deltaTime, wallMask);
+
+            if ((wallTop.collider != null || wallMiddle.collider != null || wallBottom.collider != null) && ((direction > 0 && walk_right) || (direction <0 && walk_left)))
+            {
+                isWallSliding = true;
+            }
+           
+        }
+        else
+        {
+            //Fall();
+            isWallSliding = false;
+            if (rgbd.velocity.y > 10)
+            {
+                rgbd.velocity = new Vector2(rgbd.velocity.x, 0);
+            }
+        }
     }
     void Fall()
     {
