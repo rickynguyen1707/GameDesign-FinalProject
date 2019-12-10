@@ -2,14 +2,12 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - DestroyByContacts
-    - EnemyAI
     - GameController
     - Gameover
     - Level4To5
     - Level5To6
     - Level6To7
     - PlayerMovement
-    - Snowball
     - cameraFollow
     - snowflakesmove
     Unity.2D.Tilemap.Editor.dll:
@@ -21,10 +19,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -70,37 +66,33 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9682}
+      Script: {instanceID: 9674}
     - Class: 114
-      Script: {instanceID: 9734}
+      Script: {instanceID: 9726}
     - Class: 114
-      Script: {instanceID: 9848}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 10250}
+      Script: {instanceID: 10242}
+    - Class: 114
+      Script: {instanceID: 10280}
     - Class: 114
       Script: {instanceID: 10288}
     - Class: 114
-      Script: {instanceID: 10296}
+      Script: {instanceID: 10392}
     - Class: 114
-      Script: {instanceID: 10400}
+      Script: {instanceID: 10504}
     - Class: 114
-      Script: {instanceID: 10512}
+      Script: {instanceID: 10638}
     - Class: 114
-      Script: {instanceID: 10646}
+      Script: {instanceID: 10868}
     - Class: 114
-      Script: {instanceID: 10876}
+      Script: {instanceID: 10962}
     - Class: 114
-      Script: {instanceID: 10970}
+      Script: {instanceID: 11110}
     - Class: 114
-      Script: {instanceID: 11118}
+      Script: {instanceID: 11134}
     - Class: 114
-      Script: {instanceID: 11142}
-    - Class: 114
-      Script: {instanceID: 11512}
-    - Class: 114
-      Script: {instanceID: 802052}
-    - Class: 114
-      Script: {instanceID: 972796}
+      Script: {instanceID: 11504}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -592,18 +584,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 970c7d5cd5ce9538a56d8ee22b5ab527
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: EnemyAI
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Snowball
   platform: 5
   scenePathNames:
   - Assets/Scenes/SantaAdventure.unity
